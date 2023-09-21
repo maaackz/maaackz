@@ -1,6 +1,6 @@
 hi, i'm max. i do design and development. currently, my focus is primarily on web development.
 
-portfolio: https://maackz.com/
+portfolio: https://maaackz.com/
 
 let's work together!
 just contact me at:
