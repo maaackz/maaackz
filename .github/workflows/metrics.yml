@@ -44,7 +44,7 @@ jobs:
           base: "" # Set base to empty to only show the languages card
           plugin_languages: yes
           plugin_languages_sections: most-used, recently-used
-          plugin_languages_indepth: yes
+          plugin_languages_indepth: no
           # plugin_languages_indepth_custom: DevT02/notelify,DevT02/ForgetGate,DevT02/Junk-Remover
           
           # plugin_languages_ignored: html, css, svg, shell, powershell, batchfile, batch
