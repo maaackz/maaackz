@@ -1,3 +1,12 @@
 hi, i'm max.
 
- ![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=maaackz&size_weight=0.5&count_weight=0.5&layout=compact&langs_count=8)
+<table align="center" style="width:100%;">
+  <tr>
+    <td width="50%" align="center">
+      <img height="300" src="https://raw.githubusercontent.com/DevT02/DevT02/refs/heads/main/metrics.svg" />
+    </td>
+    <td width="50%" align="center">
+      <img height="300" src="https://raw.githubusercontent.com/DevT02/DevT02/refs/heads/main/metrics.langs.svg" />
+    </td>
+  </tr>
+</table>
