@@ -65,14 +65,43 @@ jobs:
           token: ${{ secrets.METRICS_TOKEN || github.token }}
           fail_on_error: true
 
-      - name: Commit updated cards
+      - name: Commit updated cards (retry on concurrent pushes)
+        shell: bash
         run: |
+          set -euo pipefail
+
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add metrics.svg metrics.dark.svg metrics.langs.svg metrics.langs.dark.svg
-          if git diff --cached --quiet; then
-            echo "No card changes to commit"
-          else
+
+          # Save generated files outside the checkout before updating from main.
+          # This runner is ephemeral; resetting it cannot change remote history.
+          cards=(metrics.svg metrics.dark.svg metrics.langs.svg metrics.langs.dark.svg)
+          output_dir="$RUNNER_TEMP/generated-readme-metrics"
+          mkdir -p "$output_dir"
+          cp "${cards[@]}" "$output_dir/"
+
+          for attempt in 1 2 3 4 5; do
+            # Always base the new card commit on the latest main, preserving
+            # other people's changes without force-pushing or a rebase conflict.
+            git fetch origin main
+            git reset --hard origin/main
+            cp "$output_dir/"*.svg ./
+            git add -- "${cards[@]}"
+
+            if git diff --cached --quiet; then
+              echo "Cards are already up to date"
+              exit 0
+            fi
+
             git commit -m "chore: refresh README metrics"
-            git push
-          fi
+            if git push origin HEAD:main; then
+              echo "README metrics pushed successfully"
+              exit 0
+            fi
+
+            echo "main changed during push (attempt $attempt/5); retrying"
+            sleep "$((attempt * 2))"
+          done
+
+          echo "::error::Could not push generated metrics after 5 attempts"
+          exit 1
