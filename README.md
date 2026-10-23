@@ -1,12 +1,12 @@
 hi, i'm max.
 
-<table align="center" style="width:100%;">
-  <tr>
-    <td width="50%" align="center">
-      <img height="300" src="https://raw.githubusercontent.com/maaackz/maaackz/refs/heads/main/metrics.svg" />
-    </td>
-    <td width="50%" align="center">
-      <img height="300" src="https://raw.githubusercontent.com/maaackz/maaackz/refs/heads/main/metrics.langs.svg" />
-    </td>
-  </tr>
-</table>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./metrics.dark.svg">
+    <img src="./metrics.svg" alt="GitHub activity stats" width="420">
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./metrics.langs.dark.svg">
+    <img src="./metrics.langs.svg" alt="Most-used programming languages" width="420">
+  </picture>
+</p>
